@@ -6,54 +6,6 @@
   "author": "Eric Pastor",
   "license": "ISC",
   "repository": "https://github.com/ericpastorm/focusmints-desktop.git",
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "icon": "assets/icons/icon"
-      },
-      "makers": [
-        {
-          "name": "electron-forge-maker-nsis",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {
-            "options": {
-              "icon": "assets/icons/icon.png"
-            }
-          }
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {
-            "options": {
-              "icon": "assets/icons/icon.png"
-            }
-          }
-        }
-      ],
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "ericpastorm",
-              "name": "focusmints-desktop"
-            },
-            "prerelease": false,
-            "draft": false
-          }
-        }
-      ]
-    }
-  },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
