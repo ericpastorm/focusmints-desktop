@@ -1,6 +1,6 @@
 {
   "name": "FocusMints",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "FocusMints Desktop App",
   "main": "main.js",
   "author": "Eric Pastor",
@@ -25,6 +25,7 @@
     "electron": "^38.1.2"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.6.2"
   }
 }

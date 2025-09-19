@@ -63,11 +63,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/**/out/make/**/*.deb
-            dist/**/out/make/**/*.rpm
-            dist/**/out/make/**/*.exe
-            dist/**/out/make/**/*.dmg
-            dist/**/out/make/**/*.zip
+            dist/*
           draft: false
           prerelease: false
         env:
