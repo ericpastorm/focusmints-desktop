@@ -1,6 +1,6 @@
 {
   "name": "FocusMints",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "FocusMints Desktop App",
   "main": "main.js",
   "author": "Eric Pastor",
@@ -13,16 +13,18 @@
     "publish": "electron-forge publish"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^7.8.3",
+    "@electron-forge/cli": "^7.9.0",
     "@electron-forge/maker-deb": "^7.9.0",
+    "@electron-forge/maker-dmg": "^7.9.0",
     "@electron-forge/maker-rpm": "^7.9.0",
+    "@electron-forge/maker-squirrel": "^7.9.0",
     "@electron-forge/maker-zip": "^7.9.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.9.0",
+    "@electron-forge/plugin-fuses": "^7.9.0",
     "@electron-forge/publisher-github": "^7.9.0",
-    "electron": "^38.1.2",
-    "electron-forge-maker-nsis": "^26.0.12"
+    "electron": "^38.1.2"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1",
-    "electron-updater": "^6.6.2"
+    "electron-squirrel-startup": "^1.0.1"
   }
 }

@@ -1,28 +1,38 @@
+const path = require('path');
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: "assets/icons/icon" // add this if you want the icon
+    // Explicit .ico for Windows; electron-packager will pick platform-specific when available in makers
+    icon: path.resolve(__dirname, 'assets/icons/icon.ico')
   },
   rebuildConfig: {},
   makers: [
     {
-      name: "electron-forge-maker-nsis",
-      config: {}
+      name: '@electron-forge/maker-squirrel',
+      config: {
+        // Squirrel.Windows options placeholder (iconUrl, setupIcon, etc.)
+      }
     },
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
     },
     {
+      name: '@electron-forge/maker-dmg',
+      config: {
+        format: 'ULFO'
+      }
+    },
+    {
       name: '@electron-forge/maker-deb',
-      config: { options: { icon: "assets/icons/icon.png" } },
+      config: { options: { icon: path.resolve(__dirname, 'assets/icons/icon.png') } },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: { options: { icon: "assets/icons/icon.png" } },
+      config: { options: { icon: path.resolve(__dirname, 'assets/icons/icon.png') } },
     },
   ],
   plugins: [
