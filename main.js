@@ -1,38 +1,77 @@
 // Importa los módulos necesarios de Electron
-const { app, BrowserWindow } = require('electron');
+// NUEVO: Añadimos Menu, shell y autoUpdater
+const { app, BrowserWindow, Menu, shell } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const path = require('path');
+
+// NUEVO: Creamos una plantilla para el menú nativo de la aplicación
+const menuTemplate = [
+  {
+    label: 'Archivo',
+    submenu: [
+      {
+        label: 'Salir',
+        role: 'quit' // 'role' usa el comportamiento nativo (Cmd+Q en Mac, Alt+F4 en Win)
+      }
+    ]
+  },
+  {
+    label: 'Editar',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' }
+    ]
+  },
+  {
+    label: 'Ver',
+    submenu: [
+      { role: 'reload' },
+      { role: 'forceReload' },
+      { role: 'toggleDevTools', label: 'Herramientas de Desarrollador' },
+    ]
+  }
+];
+const menu = Menu.buildFromTemplate(menuTemplate);
+Menu.setApplicationMenu(menu);
+
 
 // Función para crear la ventana principal de la aplicación
 function createWindow() {
-  // Crea una nueva ventana del navegador
   const mainWindow = new BrowserWindow({
-    width: 1200, // Ancho de la ventana
-    height: 800, // Alto de la ventana
+    width: 1200,
+    height: 800,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // Opcional: para comunicación segura entre la web y el escritorio
+      preload: path.join(__dirname, 'preload.js'),
+      // NUEVO: Mejoras de seguridad explícitas
+      contextIsolation: true, // Aísla el preload/web de los procesos internos de Electron
+      nodeIntegration: false, // Impide que la web acceda a las APIs de Node.js
     },
   });
 
-  // Carga la URL de tu aplicación web FocusMints
-  mainWindow.loadURL('https://www.focusmints.app/'); // ¡Asegúrate de cambiar esto por tu URL real!
+  mainWindow.loadURL('https://www.focusmints.app/');
 
-  // Opcional: Abre las herramientas de desarrollo (para depuración)
-  // mainWindow.webContents.openDevTools();
+  // NUEVO: Gestiona enlaces externos para que se abran en el navegador
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: 'deny' }; // Impide que se cree una nueva ventana en Electron
+  });
 }
 
-// Este método se llamará cuando Electron haya terminado
-// la inicialización y esté listo para crear ventanas del navegador.
 app.whenReady().then(() => {
   createWindow();
 
+  // NUEVO: Busca actualizaciones automáticamente al iniciar la aplicación
+  autoUpdater.checkForUpdatesAndNotify();
+
   app.on('activate', function () {
-    // En macOS es común volver a crear una ventana en la aplicación cuando el
-    // icono del dock es presionado y no hay otras ventanas abiertas.
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
-// Salir cuando todas las ventanas estén cerradas, excepto en macOS.
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
 });

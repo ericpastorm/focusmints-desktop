@@ -1,29 +1,76 @@
 {
-  "name": "focusmints-desktop",
-  "version": "1.0.0",
-  "description": "",
+  "name": "FocusMints",
+  "version": "1.0.1",
+  "description": "FocusMints Desktop App",
   "main": "main.js",
+  "author": "Eric Pastor",
+  "license": "ISC",
+  "repository": "https://github.com/ericpastorm/focusmints-desktop.git",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "assets/icons/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "options": {
+              "icon": "assets/icons/icon.png"
+            }
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {
+            "options": {
+              "icon": "assets/icons/icon.png"
+            }
+          }
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "ericpastorm",
+              "name": "focusmints-desktop"
+            },
+            "prerelease": false,
+            "draft": false
+          }
+        }
+      ]
+    }
+  },
   "scripts": {
     "start": "electron-forge start",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@electron-forge/cli": "^7.9.0",
+    "@electron-forge/cli": "^7.8.3",
     "@electron-forge/maker-deb": "^7.9.0",
     "@electron-forge/maker-rpm": "^7.9.0",
     "@electron-forge/maker-squirrel": "^7.9.0",
     "@electron-forge/maker-zip": "^7.9.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.9.0",
-    "@electron-forge/plugin-fuses": "^7.9.0",
-    "@electron/fuses": "^1.8.0",
+    "@electron-forge/publisher-github": "^7.9.0",
     "electron": "^38.1.2"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.6.2"
   }
 }
