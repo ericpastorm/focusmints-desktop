@@ -1,6 +1,6 @@
 {
   "name": "FocusMints",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "FocusMints Desktop App",
   "main": "main.js",
   "author": "Eric Pastor",
@@ -13,7 +13,7 @@
       },
       "makers": [
         {
-          "name": "@electron-forge/maker-squirrel",
+          "name": "electron-forge-maker-nsis",
           "config": {}
         },
         {
@@ -64,10 +64,10 @@
     "@electron-forge/cli": "^7.8.3",
     "@electron-forge/maker-deb": "^7.9.0",
     "@electron-forge/maker-rpm": "^7.9.0",
-    "@electron-forge/maker-squirrel": "^7.9.0",
     "@electron-forge/maker-zip": "^7.9.0",
     "@electron-forge/publisher-github": "^7.9.0",
-    "electron": "^38.1.2"
+    "electron": "^38.1.2",
+    "electron-forge-maker-nsis": "^26.0.12"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
