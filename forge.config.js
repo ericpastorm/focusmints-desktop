@@ -5,7 +5,6 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    // Explicit .ico for Windows; electron-packager will pick platform-specific when available in makers
     icon: path.resolve(__dirname, 'assets/icons/icon.ico')
   },
   rebuildConfig: {},
@@ -13,7 +12,6 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        // Squirrel.Windows options placeholder (iconUrl, setupIcon, etc.)
       }
     },
     {

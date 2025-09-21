@@ -3,9 +3,8 @@ name: Build & Release FocusMints
 on:
   push:
     tags:
-      - 'v*.*.*' # Se activa cuando empujas un tag como v1.0.2
+      - 'v*.*.*' 
 
-# Grant release job permission to create releases and upload assets
 permissions:
   contents: write
 
@@ -67,5 +66,4 @@ jobs:
           draft: false
           prerelease: false
         env:
-          # Use a Personal Access Token stored as GH_TOKEN for private repo release asset uploads
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
